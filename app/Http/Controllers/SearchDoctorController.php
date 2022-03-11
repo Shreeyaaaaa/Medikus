@@ -99,7 +99,8 @@ class SearchDoctorController extends Controller
     public function myBookings()
     {
         $appointments = Booking::latest()->where('user_id', auth()->user()->id)->get();
-        return view('booking.index', compact('appointments'));
+       //return view('booking.index', compact('appointments'));
+        return view('patients.patient-dashboard', compact('appointments'));
     }
 
     public function destroy($id){

@@ -113,9 +113,8 @@ Route::group(['middleware' => ['auth', 'doctor']], function () {
     Route::get('/doctor-register', function () {
         return view('doctors.doctor-register');
     });
-    Route::get('/doctor-dashboard', function () {
-        return view('doctors.doctor-dashboard');
-    });
+   
+    
     Route::get('/appointments', function () {
         return view('doctors.appointments');
     });
@@ -128,8 +127,8 @@ Route::group(['middleware' => ['auth', 'doctor']], function () {
     Route::get('/doctor-profile-settings', function () {
         return view('doctors.doctor-profile-settings');
     });
-
-   Route::post('/appointment/check', [AppointmentController::class, 'check'])->name('appointment.check');
+   
+    Route::post('/appointment/check', [AppointmentController::class, 'check'])->name('appointment.check');
 
     Route::post('/appointment/check', [AppointmentController::class, 'check'])->name('appointment.check');
 
@@ -140,14 +139,15 @@ Route::group(['middleware' => ['auth', 'doctor']], function () {
     Route::post('/user-profile1', [DoctorProfileUpdateController::class, 'store'])->name('profile1.store');
     Route::post('/profile-pic1',[DoctorProfileUpdateController::class,'profilePic'])->name('profile1.pic');
 //my-patient
-     Route::get('/my-patient',[MyPatientController::class,'index'])->name('mypatients.list');
-     Route::get('/my-patient/all',[MyPatientController::class,'allTimeAppointment'])->name('all.appointments');
-     Route::get('/status/update/{id}',[MyPatientController::class,'toggleStatus'])->name('update.status');
-     //presciption
-      Route::get('/patient-today',[PrescriptionController::class,'index']);
-      Route::post('/prescription',[PrescriptionController::class,'store'])->name('prescription');
-      Route::post('/prescription/{userId}/{date}',[PrescriptionController::class,'show'])->name('prescription.show');
-    Route::POST('/prescribed-patients',[PrescriptionController::class,'patientsFromPrescription'])->name('prescribed.patients');
+    Route::get('/doctor-dashboard', [MyPatientController::class, 'index'])->name('mypatient.lists');
+    Route::get('/my-patient',[MyPatientController::class,'index'])->name('mypatients.list');
+    Route::get('/my-patient/all',[MyPatientController::class,'allTimeAppointment'])->name('all.appointments');
+    Route::get('/status/update/{id}',[MyPatientController::class,'toggleStatus'])->name('update.status');
+//Prescrption
+    Route::get('/patient-today',[PrescriptionController::class,'index']);
+    Route::GET('/prescription',[PrescriptionController::class,'store'])->name('prescription');
+    Route::GET('/prescription/{userId}/{date}',[PrescriptionController::class,'show'])->name('prescription.show');
+    Route::GET('/prescribed-patients',[PrescriptionController::class,'patientsFromPrescription'])->name('prescribed.patients');
 
 
 
@@ -183,9 +183,7 @@ Route::group(['middleware' => ['auth', 'patient']], function () {
     Route::get('/profile-settings', function () {
         return view('patients.profile-settings');
     });
-    Route::get('/patient-dashboard', function () {
-        return view('patients.patient-dashboard');
-    });
+   
     Route::get('/checkout', function () {
         return view('patients.checkout');
     });
@@ -203,14 +201,13 @@ Route::group(['middleware' => ['auth', 'patient']], function () {
 
     Route::POST('/book/appointment',[SearchDoctorController::class,'store'])->name('booking.appointment');
 
+    Route::get('/patient-dashboard',[SearchDoctorController::class,'myBookings'])->name('my.booking');
+
     Route::get('/my-booking',[SearchDoctorController::class,'myBookings'])->name('my.booking');
 
     Route::get('/my-booking-cancel/{id}',[SearchDoctorController::class,'destroy'])->name('mybooking.destroy');
 
     Route::get('/my-prescription',[SearchDoctorController::class,'myPrescription'])->name('my.prescription');
-
-
-
 });
 
    Route::get('/searchdoctor', [SearchDoctorController::class, 'index']);

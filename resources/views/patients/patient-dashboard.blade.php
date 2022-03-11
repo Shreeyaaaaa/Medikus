@@ -86,12 +86,12 @@
 											</a>
 										</li>
 										<li>
-											<a href="favourites">	<i class="fas fa-bookmark"></i>
+											<a href="{{url('my-booking')}}">	<i class="fas fa-bookmark"></i>
 												<span>My Appointments</span>
 											</a>
 										</li>
 										<li>
-											<a href="favourites">	<i class="fas fa-bookmark"></i>
+										<a href="{{url('my-prescription')}}">	<i class="fa fa-sticky-note" aria-hidden="true"></i>
 												<span>My Prescription</span>
 											</a>
 										</li>
@@ -112,7 +112,7 @@
 											</a>
 										</li>
 										<li>
-											<a href="profile-settings">	<i class="fas fa-user-cog"></i>
+											<a href="{{url('user-profile')}}">	<i class="fas fa-user-cog"></i>
 												<span>Profile Settings</span>
 											</a>
 										</li>
@@ -175,68 +175,59 @@
 														<table class="table table-hover table-center mb-0">
 															<thead>
 																<tr>
+																	<th></th>
 																	<th>Doctor</th>
+																	<th>Time</th>
 																	<th>Appt Date</th>
 																	<th>Booking Date</th>
 																	<th>Amount</th>
-																	<th>Follow Up</th>
 																	<th>Status</th>
+																	
 																	<th></th>
 																</tr>
 															</thead>
 															<tbody>
-																<tr>
-																	<td>
-																		<h2 class="table-avatar">
-																			<a href="doctor-profile.html" class="avatar avatar-sm mr-2">
-																				<img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-01.jpg" alt="User Image">
-																			</a>
-																			<a href="doctor-profile.html">Dr. Ruby Perrin <span>Dental</span></a>
-																		</h2>
-																	</td>
-																	<td>14 Nov 2019 <span class="d-block text-info">10.00 AM</span></td>
-																	<td>12 Nov 2019</td>
-																	<td>$160</td>
-																	<td>16 Nov 2019</td>
-																	<td><span class="badge badge-pill bg-success-light">Confirm</span></td>
-																	<td class="text-right">
-																		<div class="table-action">
-																			<a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
-																				<i class="fas fa-print"></i> Print
-																			</a>
-																			<a href="javascript:void(0);" class="btn btn-sm bg-info-light">
-																				<i class="far fa-eye"></i> View
-																			</a>
-																		</div>
-																	</td>
-																</tr>
-																
-																<tr>
-																	<td>
-																		<h2 class="table-avatar">
-																			<a href="doctor-profile.html" class="avatar avatar-sm mr-2">
-																				<img class="avatar-img rounded-circle" src="assets/img/doctors/doctor-thumb-10.jpg" alt="User Image">
-																			</a>
-																			<a href="doctor-profile.html">Dr. Olga Barlow  <span>Dental</span></a>
-																		</h2>
-																	</td>
-																	<td>5 Nov 2019 <span class="d-block text-info">5.00 PM</span></td>
-																	<td>1 Nov 2019</td>
-																	<td>$100</td>
-																	<td>7 Nov 2019</td>
-																	<td><span class="badge badge-pill bg-success-light">Confirm</span></td>
-																	<td class="text-right">
-																		<div class="table-action">
-																			<a href="javascript:void(0);" class="btn btn-sm bg-primary-light">
-																				<i class="fas fa-print"></i> Print
-																			</a>
-																			<a href="javascript:void(0);" class="btn btn-sm bg-info-light">
-																				<i class="far fa-eye"></i> View
-																			</a>
-																		</div>
-																	</td>
-																</tr>
-															</tbody>
+                        @forelse($appointments as $key=>$appointment)
+                        <tr>
+                          <th scope="row">{{$key+1}}</th>
+                          <td>{{$appointment->doctor->name}}</td>
+                          <td>{{$appointment->time}}</td>
+                          <td>{{$appointment->date}}</td>
+                          <td>{{$appointment->created_at}}</td>
+                          <td></td>
+                          <td>
+                              @if($appointment->status==0)
+                              <button class="btn btn-primary">Not visited</button>
+                              @else 
+                              <button class="btn btn-success"> Cheked</button>
+                              @endif
+                          </td>
+                          <td>
+                              @if($appointment->status==0)
+                              
+                              <form action="{{route('mybooking.destroy',[$appointment->id])}}" method="get">@csrf
+                                       
+                                    @method('DELETE')
+                                    <button type="submit"  class="btn btn-sm bg-danger-light"> Cancel<i class="fe fe-trash"></i></button>
+                                    
+                                </form>
+                         
+                                                     
+                              @endif
+                          </td>
+                                             
+                        </tr>
+                      
+
+                        @empty
+                    
+                        <td>You have no any appointments</td>
+                        @endforelse
+
+                            
+                          
+                       
+                      </tbody>
 														</table>
 													</div>
 												</div>

@@ -2,7 +2,7 @@
 @if(count($bookings)>0)
 <div class="modal fade" id="exampleModal{{$booking->user_id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
-    <form action="{{route('prescription')}}" method="post">@csrf
+    <form action="{{route('prescription')}}" method="GET">@csrf
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Prescription</h5>

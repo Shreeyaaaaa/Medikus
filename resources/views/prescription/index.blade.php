@@ -1,10 +1,13 @@
 @extends('layouts.app')
 
+
+@section('content')
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card">
-               <form action="{{route('mypatients.list')}}" method="POST">
+               <form action="{{route('mypatients.list')}}" method="GET">
 
                  <div class="card-header">
                      Filter:
@@ -84,3 +87,4 @@
         </div>
     </div>
 </div>
+@endsection

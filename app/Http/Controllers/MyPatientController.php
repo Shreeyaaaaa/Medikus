@@ -14,7 +14,8 @@ class MyPatientController extends Controller
     		return view('doctors.my-patients.index',compact('bookings'));
     	}
     	$bookings = Booking::latest()->where('date',date('Y-m-d'))->where('doctor_id',auth()->user()->id)->get();
-    	return view('doctors.my-patients.index',compact('bookings'));
+    
+        return view('doctors.doctor-dashboard',compact('bookings'));
     }
 
     public function toggleStatus($id)

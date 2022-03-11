@@ -153,6 +153,14 @@
 													</span>
 												</a>
 											</li>
+											<li>
+												    <a href="{{url('patient-today')}}">
+													<i class="fas fa-user-injured"></i>
+													<span>Prescription
+													</span>
+												</a>
+											</li>
+
 
 
 												
@@ -175,17 +183,6 @@
 												</a>
 											</li>
 
-
-
-
-
-
-											<li>
-												<a href="invoices">
-													<i class="fas fa-file-invoice"></i>
-													<span>Invoices</span>
-												</a>
-											</li>
 											<li>
 												<a href="reviews">
 													<i class="fas fa-star"></i>
@@ -206,16 +203,9 @@
 												</a>
 											</li>
 											<li>
-												<a href="social-media">
-													<i class="fas fa-share-alt"></i>
-													<span>Social Media</span>
-												</a>
+												
 											</li>
-											<li>
-												<a href="doctor-change-password">
-													<i class="fas fa-lock"></i>
-													<span>Change Password</span>
-												</a>
+											
 											</li>
 											<li>
 												<a href="index-3">
